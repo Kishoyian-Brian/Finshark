@@ -1,0 +1,11 @@
+# Environment files
+.env
+*.env
+!.env.example
+
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
