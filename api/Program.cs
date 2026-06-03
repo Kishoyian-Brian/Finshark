@@ -13,6 +13,7 @@ var connectionString =
     $"Username={Environment.GetEnvironmentVariable("DB_USER")};" +
     $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")}";
 
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
