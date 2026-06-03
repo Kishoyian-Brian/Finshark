@@ -14,7 +14,7 @@ namespace api.Mapper
             return new StockDto
             {
                 Id = stockModel.Id,
-                Symbol = stockModel .Symbol,
+                Symbol = stockModel.Symbol,
                 CompanyName = stockModel.CompanyName,
                 Purchase = stockModel.Purchase,
                 LastDividend = stockModel.LastDividend,
@@ -22,5 +22,20 @@ namespace api.Mapper
                 MarketCap = stockModel.MarketCap
             };
         }
+
+
+        public static Stocks ToStockFromCreateDto(this CreateStockRequestDto stockDto)
+        {
+            return new Stocks
+            {
+                Symbol = stockDto.Symbol,
+                CompanyName = stockDto.CompanyName,
+                Purchase = stockDto.Purchase,
+                LastDividend = stockDto.LastDividend,
+                Industry = stockDto.Industry,
+                MarketCap = stockDto.MarketCap
+            };
+        }
     }
 }
+
