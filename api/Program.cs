@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using DotNetEnv;
+using api.interfaces;
+using api.Repository;
 
 Env.TraversePath().Load();
 
@@ -22,6 +24,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
+
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 
