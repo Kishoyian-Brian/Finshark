@@ -21,10 +21,9 @@ namespace api.Mapper
                 StockId = commentModel.StockId
             };
         }
-    }
+    
 
-    public static class CreateCommentMapper
-    {
+    
         public static Comments ToCommentFromCreate(this CreateCommentDto commentDto, int stockId)
         {
             return new Comments
@@ -32,6 +31,17 @@ namespace api.Mapper
                 Title = commentDto.Title,
                 Content = commentDto.Content,
                 StockId = stockId
+            };
+        }
+  
+
+
+        public static Comments ToCommentFromUpdate(this UpdateCommentDto updateDto)
+        {
+            return new Comments
+            {
+                Title =updateDto.Title,
+                Content =updateDto.Content,
             };
         }
     }

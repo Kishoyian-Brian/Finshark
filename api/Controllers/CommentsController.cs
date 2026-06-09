@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using api.Dtos.Comments;
+using api.Dtos.Stocks;
 using api.interfaces;
 using api.Mapper;
 using Microsoft.AspNetCore.Mvc;
@@ -66,6 +67,20 @@ namespace api.Controllers
             var commentModel = commentDto.ToCommentFromCreate(stockId);
             await _commentRepository.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+
+        public async Task<IActionResult>Update([FromRoute] int id, [FromBody] UpdateCommentDto updateDto)
+        {
+            var comment = await _commentRepository.UpdateAsync(id, updateDto.ToCommentFromUpdate());
+
+            if(comment == null)
+            {
+                NotFound("Comment not found");
+            }
+            return Ok(comment.ToCommentDto());
         }
 
         [HttpDelete("{id:int}")]
