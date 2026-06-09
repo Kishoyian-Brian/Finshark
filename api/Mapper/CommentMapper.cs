@@ -22,4 +22,17 @@ namespace api.Mapper
             };
         }
     }
+
+    public static class CreateCommentMapper
+    {
+        public static Comments ToCommentFromCreate(this CreateCommentDto commentDto, int stockId)
+        {
+            return new Comments
+            {
+                Title = commentDto.Title,
+                Content = commentDto.Content,
+                StockId = stockId
+            };
+        }
+    }
 }
