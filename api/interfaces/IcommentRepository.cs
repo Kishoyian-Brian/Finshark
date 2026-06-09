@@ -13,5 +13,7 @@ namespace api.interfaces
         Task<Comments?>GetByIdAsync(int id);
 
         Task<Comments>CreateAsync(Comments commentModel);
+
+        Task<Comments>DeleteAsync(int id);
     }
 }
