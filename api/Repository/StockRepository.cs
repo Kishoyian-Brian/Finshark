@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.Dtos.Stocks;
 using api.interfaces;
+using api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -16,9 +18,55 @@ namespace api.Repository
         {
             _context = context;
         }
-        public Task<List<Models.Stocks>> GetAllAsync()
+
+        public async Task<Stocks> CreateAsync(Stocks stockModel)
         {
-            return _context.Stocks.ToListAsync();
+            await _context.Stocks.AddAsync(stockModel);
+            await _context.SaveChangesAsync();
+            return stockModel;
+        }
+
+        public async Task<Stocks?> DeleteAsync(int id)
+        {
+            var stockModel = await _context.Stocks.FindAsync(id);
+
+            if(stockModel == null)
+            {
+                return null;
+            }
+            _context.Stocks.Remove(stockModel);
+            await _context.SaveChangesAsync();
+            return stockModel;
+        }
+
+        public async Task<List<Models.Stocks>> GetAllAsync()
+        {
+            return await _context.Stocks.ToListAsync();
+        }
+
+        public async Task<Stocks?> GetByIdAsync(int id)
+        {
+            return await _context.Stocks.FindAsync(id);
+        }
+
+        public async Task<Stocks?> UpdateAsync(int id, UpdateStockRequestDto stockDto)
+        {
+            var existingStock = await _context.Stocks.FindAsync(id);
+            if (existingStock == null)
+            {
+                return null;
+            }
+
+            existingStock.Symbol = stockDto.Symbol;
+            existingStock.CompanyName = stockDto.CompanyName;
+            existingStock.Purchase = stockDto.Purchase;
+            existingStock.LastDividend = stockDto.LastDividend;
+            existingStock.Industry = stockDto.Industry;
+            existingStock.MarketCap = stockDto.MarketCap;
+
+            await _context.SaveChangesAsync();
+            return existingStock;
+
         }
     }
 }
