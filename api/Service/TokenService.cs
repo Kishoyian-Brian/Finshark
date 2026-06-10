@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace api.Service
 {
-    public class TokenService : ItokenService
+    public class TokenService : ITokenService
     {
         private readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
@@ -21,7 +21,7 @@ namespace api.Service
 
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
         }
-        public string createToken(AppUser user)
+        public string CreateToken(AppUser user)
         {
             var claims = new List<Claim>
             {
@@ -46,5 +46,7 @@ namespace api.Service
 
             return tokenHandler.WriteToken(token);
         }
+
+
     }
 }
