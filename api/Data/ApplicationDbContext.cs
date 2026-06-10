@@ -13,5 +13,27 @@ namespace api.Data
 
         public DbSet<Stocks> Stocks { get; set; }
         public DbSet<Comments> Comments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Id = "dad088ce-ddcd-4117-bb11-0f174ebab3e9",
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",
+                    ConcurrencyStamp = "a4991fb0-215e-4a48-be47-15e12daa036b"
+                },
+                new IdentityRole
+                {
+                    Id = "8604419d-b486-4004-8064-0b2702695a59",
+                    Name = "User",
+                    NormalizedName = "USER",
+                    ConcurrencyStamp = "64feb54c-7d09-4303-91ae-9b2cf5df6921"
+                });
+        }
+      
     }
 }
