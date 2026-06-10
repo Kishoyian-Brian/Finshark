@@ -60,12 +60,12 @@ namespace api.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(createdUser.Errors);
                 }
             }
             catch (Exception e)
             {
-                return NotFound();
+                return StatusCode(500,e.Message);
             }
         }
     }
