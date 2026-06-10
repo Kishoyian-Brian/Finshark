@@ -16,5 +16,6 @@ namespace api.Models
         public AppUser AppUser {get; set;}
 
         public Stocks Stocks {get; set;}
+        public string Industry { get; internal set; }
     }
 }
