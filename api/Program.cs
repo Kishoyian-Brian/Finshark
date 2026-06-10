@@ -7,6 +7,7 @@ using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using api.Service;
 
 Env.TraversePath().Load();
 
@@ -70,6 +71,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<IcommentRepository, CommentRepository>();
+builder.Services.AddScoped<ItokenService, TokenService>();
 
 var app = builder.Build();
 
